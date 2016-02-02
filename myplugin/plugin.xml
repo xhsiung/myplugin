@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.axsoho.hello.Hello"
+    version="0.0.1">
+    <name>Hello</name>
+    <engines>
+        <engine name="cordova" version=">=3.7.1"/>
+    </engines>
+
+    <js-module src="www/hello.js" name="hello">
+        <clobbers target="hello" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Hello">
+                <param name="android-package" value="com.axsoho.hello.Hello" />
+            </feature>
+        </config-file>
+        <source-file src="src/android/Hello.java" target-dir="src/com/axsoho/hello" />
+	<hook type="after_plugin_install" src="scripts/afterBuild.js" />
+    </platform>
+
+</plugin>
