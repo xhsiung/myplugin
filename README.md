@@ -1,0 +1,2 @@
+# myplugin
+cordova_plugin
