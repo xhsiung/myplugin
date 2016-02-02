@@ -58,19 +58,19 @@ def getWebJS(mclass, mfunc):
     channel.createSticky('onCordovaInfoReady');
     channel.waitForInitialization('onCordovaInfoReady');
     
-    var %s = function() {};
-    %s.prototype.%s = function (arg0 ,arg1 ,successCallback, errorCallback) {
+    var {mclass} = function() {{}};
+    {mclass}.prototype.{mfunc} = function (arg0 ,arg1 ,successCallback, errorCallback) {{
         //對應javascript  cordova.exec(SuccessFn,  FailFn , Device , Fn , [ ]) //Fn即為發佈的function
-        cordova.exec(successCallback, errorCallback, "%s", "%s", [arg0 , arg1]);
-    }
+        cordova.exec(successCallback, errorCallback, "{mclass}", "{mfunc}", [arg0 , arg1]);
+    }}
 
-    module.exports = new %s();
-"""%(mclass, mclass , mfunc , mclass , mfunc , mclass)
+    module.exports = new {mclass}();
+""".format(**locals())
     return tpl
 
 
 def getClass(nspace,mclass,mfunc):
-    tpl="""package %s;
+    tpl="""package {nspace};
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
@@ -78,12 +78,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class %s extends CordovaPlugin{
+public class {mclass} extends CordovaPlugin{{
     @Override
-    public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {{
         //return super.execute(action, args, callbackContext);
 
-        if (action.equalsIgnoreCase("%s")){
+        if (action.equalsIgnoreCase("{mfunc}")){{
             JSONObject jobj = args.getJSONObject(0);
             //callbackContext.success("my call back");
             //callbackContext.error("erorr");
@@ -93,11 +93,11 @@ public class %s extends CordovaPlugin{
             //PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
             //callbackContext.sendPluginResult( result);
             return true;
-        }
+        }}
         return false;
-    }
-}
-"""%( nspace , mclass , mfunc)
+    }}
+}}
+""".format(**locals())
     return tpl
 
 def getHTML(mclass,mfunc):
@@ -108,21 +108,21 @@ def getHTML(mclass,mfunc):
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script>
-             function test(){
-                var conf = {
+             function test(){{
+                var conf = {{
                     "name": "alex",
                     "mobile": "09138"
-                }
+                }}
 
-                %s.%s( conf ,false,
-                    function(message){
+                {mclass}.{mfunc}( conf ,false,
+                    function(message){{
                         alert(message);
-                    },
-                    function(){
+                    }},
+                    function(){{
                         alert("Error calling Hello Plugin");
-                    }
+                    }}
                 );
-            }
+            }}
 
         </script>    
     </head>
@@ -130,7 +130,7 @@ def getHTML(mclass,mfunc):
         <button type="button" onclick="test()" >Click me </button>
     </body>
 </html>
-"""%(mclass, mfunc)
+""".format(**locals())
     return tpl
 
 def getTest():
