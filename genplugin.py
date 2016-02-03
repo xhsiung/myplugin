@@ -5,14 +5,14 @@ import shutil
 
 def createDIR(dirs=None):
     for xdir in dirs:
-        os.system("rm -rf  %s"%xdir )
+        os.system("rm -rf %s"%xdir )
 
     for xdir in dirs:
-        os.system("mkdir -p  %s"%xdir)
+        os.system("mkdir -p %s"%xdir)
 
 
 def getPlugin(nspace, mclass,opath):
-    lowerclass = mclass.lower()
+    lmclass = mclass.lower()
     tpl="""<?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="{nspace}.{mclass}"
@@ -22,8 +22,8 @@ def getPlugin(nspace, mclass,opath):
         <engine name="cordova" version=">=3.7.1"/>
     </engines>
 
-    <js-module src="www/{lowerclass}.js" name="{lowerclass}">
-        <clobbers target="{lowerclass}" />
+    <js-module src="www/{lmclass}.js" name="{lmclass}">
+        <clobbers target="{lmclass}" />
     </js-module>
 
     <!-- android -->
@@ -101,6 +101,7 @@ public class {mclass} extends CordovaPlugin{{
     return tpl
 
 def getHTML(mclass,mfunc):
+    lmclass = mclass.lower()
     tpl="""<!DOCTYPE html>
 <html>
     <head>
@@ -114,7 +115,7 @@ def getHTML(mclass,mfunc):
                     "mobile": "09138"
                 }}
 
-                {mclass}.{mfunc}( conf ,false,
+                {lmclass}.{mfunc}(conf,false,
                     function(message){{
                         alert(message);
                     }},
