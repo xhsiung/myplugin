@@ -139,7 +139,7 @@ def getTest():
 
 def main():
     if len(sys.argv ) <= 2:
-        print "genplugin.py Namespace.Class Fn\ngenplugin.py com.axsoho.hello.Hello greet"
+        print "build-cordova-plugin.py Namespace.Class Fn\nbuild-cordova-plugin.py com.axsoho.hello.Hello greet"
         sys.exit(-1)
 
     #params

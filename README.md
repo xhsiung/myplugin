@@ -1,4 +1,4 @@
 # myplugin
 cordova_plugin
 ## Usage
-genplugin.py com.axsoho.hello.Hello greet
+build-cordova-plugin.py com.axsoho.hello.Hello greet
