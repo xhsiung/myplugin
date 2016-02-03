@@ -15,14 +15,14 @@ def getPlugin(nspace, mclass,opath):
     lmclass = mclass.lower()
     tpl="""<?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="{nspace}.{mclass}"
+    id="{nspace}"
     version="0.0.1">
     <name>{mclass}</name>
     <engines>
         <engine name="cordova" version=">=3.7.1"/>
     </engines>
 
-    <js-module src="www/{lmclass}.js" name="{lmclass}">
+    <js-module src="www/{lmclass}.js" name="{mclass}">
         <clobbers target="{lmclass}" />
     </js-module>
 
